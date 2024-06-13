@@ -2,34 +2,53 @@ productoModel = require('../modelos/producto').productos;
 var productosController = {}
 
 productosController.getProductos = function(res){
-    res.json({ state:true,data: productos });
+    res.json({ resultado: productos });
 }
 
 productosController.saveProducto = function(req,res){
 
-    const producto = {'cod_cat':req.body.cod_cat,'cod_producto':req.body.cod_producto,'nombre':req.body.nombre};
+    const producto = {'cod_prod':req.body.cod_producto,'estado':req.body.estado,'nombre':req.body.nombre};
+
+    
 
 
-    productoModel.existeProducto(producto, function(resultado){
-
-        productoModel.validaParams(producto, function(result){
-            if(!result.state) {
-                res.json(result);
-                return false;
-            }else{
-                producto.cod_cat = Number(producto.cod_cat);
-                productos.push(producto);
-                
-                res.json({ state: true, mensaje:"El Producto se almaceno correctamente" });
-                return false;
-            }
+    
+    productoModel.validaParams(producto, function(result){
+        if(result.state){
+        productoModel.buscarCodigo(producto, function(resultado){
             
-        });
-        
+                if(resultado.state){
+                    {
+                        if(resultado.posicion != -1){
+                            res.json({ mensaje: 'El producto ya existe, no se puede volver a registrar' });
+                            return false;
+                        }else{
+                            //productos.push(producto);
+                            productoModel.crear(producto, function(resultado){
+                                if(resultado.state){
+                                    console.log(resultado)
+                                    res.json({ mensaje:resultado.mensaje });
+                                } 
+                        
+                            })
+                            return false;
+                        }
+                        
+                    }
+                }else {
+                    res.json({ mensaje:resultado.mensaje });
+                    return false;
+                }
+                
+                
+            });
+        }else {
+            res.json({ mensaje:result.mensaje });
+            return false;
+        }
     });
-
-
 }
+
 
 
 module.exports.productos = productosController;
