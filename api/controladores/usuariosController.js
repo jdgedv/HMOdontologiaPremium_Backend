@@ -138,6 +138,34 @@ usuariosController.delete = function(req,res){
     
 }
 
+usuariosController.login = function(req,res){
+
+
+    var post = {
+        usuario: req.body.usuario,
+        clave: req.body.clave,
+    }
+
+    const camposObligatorios = ["usuario","clave"];
+
+    validarObligatorios(camposObligatorios,post,res)
+
+    usuariosModel.login(post,function(respuesta){
+
+        if(respuesta.state == true) {
+            if(respuesta.data.length == 0){
+                res.json({state: false, mensaje:"Error en las Credenciales de Acceso"})
+            }else{
+                
+                req.session.nombre = respuesta.data[0].nombre
+                req.session.rol = respuesta.data[0].rol
+                res.json({state: true, mensaje:"Bienvenido " + respuesta.data[0].nombre})
+            }
+        }
+    })
+
+}
+
 
 validarObligatorios = function(camposObligatorios,post,res){
     for (let campo of camposObligatorios) {

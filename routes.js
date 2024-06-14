@@ -42,3 +42,11 @@ app.delete('/usuarios/delete', async (req,res) => {
     usuariosController.delete(req,res);
 });
 
+app.post('/usuarios/login', async (req,res) => {
+    usuariosController.login(req,res);
+});
+
+app.post('/usuarios/state', async (req,res) => {
+    res.json(req.session)
+});
+

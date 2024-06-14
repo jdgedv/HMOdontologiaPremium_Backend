@@ -40,6 +40,20 @@ usuariosModel.buscarUsuario = function(post, callback) { //validar tambien cedul
     
 }
 
+usuariosModel.login = function(post, callback) { 
+
+    myModel.find({usuario:post.usuario,clave:post.clave},{ nombre:1, rol:1, estado: 1 }).then(
+        (respuesta) => {
+        console.log("find: ",respuesta)
+        return callback({state: true,data: respuesta});
+
+    }).catch((err) => {
+        return callback({state: false, mensaje: err });
+
+    })
+    
+}
+
 usuariosModel.buscarId = function(post, callback) { 
 
     myModel.find({_id:post._id},{usuario:1,_id:0}).then(

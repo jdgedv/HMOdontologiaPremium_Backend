@@ -55,7 +55,7 @@ app.use(cors({
 
 //1000x60 es un minuto 1000x60x60 es una hora
 
-/*
+
 var session = require("express-session")({
     secret:config.palabraClave,
     resave:true,
@@ -66,7 +66,7 @@ var session = require("express-session")({
 })
 
 app.use(session)
-*/
+
 require('./routes.js')
 
 app.listen(config.puerto, () => {
