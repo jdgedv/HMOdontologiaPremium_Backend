@@ -1,14 +1,10 @@
 const express = require('express');
 global.config = require('./config.js').config;
 global.app=express();
+global.sha256 = require("sha256")
 
-global.productos = [
-    {'cod_cat':'111','cod_producto':'100A','nombre':'ProductoTest'},
-    
-];
-global.categorias = [
-    {'cod_cat':'111','nombre':'CategoriaTest','estado':'true'}
-];
+global.productos = [];
+global.categorias = [];
 
 var bodyparser = require("body-parser");
 

@@ -3,9 +3,10 @@ var usuariosController = {}
 
 usuariosController.save = function(req,res){
 
+    const pass = sha256(req.body.clave + config.passsha256)
     var post = {
         usuario:req.body.usuario,
-        clave:req.body.clave,
+        clave: pass,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
         cedula:req.body.cedula,
@@ -15,6 +16,8 @@ usuariosController.save = function(req,res){
         rol:req.body.rol,
     };
 
+
+    
 
     const camposObligatorios = ["usuario", "clave", "nombre", "apellidos", "cedula", "correo", "telefono"];
 
@@ -175,6 +178,8 @@ validarObligatorios = function(camposObligatorios,post,res){
         }
     }
 }
+
+
     
 
 
