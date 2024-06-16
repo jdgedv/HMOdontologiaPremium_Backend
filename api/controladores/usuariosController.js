@@ -17,8 +17,6 @@ usuariosController.save = function(req,res){
     };
 
 
-    
-
     const camposObligatorios = ["usuario", "clave", "nombre", "apellidos", "cedula", "correo", "telefono"];
 
     validarObligatorios(camposObligatorios,post,res)
@@ -113,9 +111,6 @@ usuariosController.delete = function(req,res){
 
     validarObligatorios(camposObligatorios,post,res)
 
-
-    
-
     usuariosModel.buscarId(post, function(resultado){
             
         if(resultado.posicion != -1){
@@ -133,6 +128,8 @@ usuariosController.delete = function(req,res){
             res.json({ state:false,mensaje: 'El _id de usuario no existe' });
             return false;
         }
+
+        console.log(respuesta)
         
         
     });

@@ -14,12 +14,10 @@ var usuariosSchema = new Schema({
     correo:String,
     telefono:String,
     estado:Number,
-    rol:Number
+    rol:Number //   1=admin     2=usuario 3     =cliente
 })
 
 const myModel = mongoose.model('usuarios',usuariosSchema)
-
-
 
 usuariosModel.buscarUsuario = function(post, callback) { //validar tambien cedula y correo
 
@@ -42,7 +40,7 @@ usuariosModel.buscarUsuario = function(post, callback) { //validar tambien cedul
 
 usuariosModel.login = function(post, callback) { 
 
-    myModel.find({usuario:post.usuario,clave:post.clave},{ nombre:1, rol:1, estado: 1 }).then(
+    myModel.find({usuario:post.usuario,clave:post.clave},{ nombre:1, rol:1, estado:1 }).then(
         (respuesta) => {
         console.log("find: ",respuesta)
         return callback({state: true,data: respuesta});
@@ -106,7 +104,6 @@ usuariosModel.crear = function(post, callback) {
     })
 }
 
-
 usuariosModel.update = function(post, callback){
     console.log("---------------------update-------------")
     myModel.updateOne({_id:post._id},{
@@ -125,7 +122,6 @@ usuariosModel.update = function(post, callback){
         return callback({ state: false, mensaje: error })
     })
 }
-
 
 usuariosModel.delete = function(post, callback){
     console.log("---------------------delete-------------")
