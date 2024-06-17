@@ -19,9 +19,6 @@ app.get('/productos/listar', async (req,res) => {
 });
 
 
-
-
-
 app.post("/usuarios/save",function(req,res){
     usuariosController.save(req,res);
 });

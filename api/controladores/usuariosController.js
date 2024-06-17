@@ -178,9 +178,6 @@ usuariosController.delete = function(req,res){
 
     if(!validarObligatorios(camposObligatorios,post,res)) return false
 
-
-    
-
     usuariosModel.buscarId(post, function(resultado){
             
         if(resultado.posicion != -1){
@@ -198,6 +195,8 @@ usuariosController.delete = function(req,res){
             res.json({ state:false,mensaje: 'El _id de usuario no existe' });
             return false;
         }
+
+        console.log(respuesta)
         
         
     });
