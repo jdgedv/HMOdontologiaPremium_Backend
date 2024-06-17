@@ -55,12 +55,39 @@ usuariosController.save = function(req,res){
 //ver clase del 06 de junio 2024 mas o menos a partir de 2:30:00
 //el html tiene un enlace con el correo y el código de activación, dicha página debe existir en front y es la que debe llamar a la ruta de activar.
 
-/*
+
     let mailOptions = {
         from: config.usergmail,
         to:post.correo,
         subject:"Verifica tu cuenta con el siguiente código: " + post.azar,
-        html:`<!doctype html>
+        html:`
+        <!DOCTYPE html>
+<html>
+<head>
+    <title>Activación de Cuenta</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
+    <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border: 1px solid #dcdcdc; border-radius: 10px;">
+        <h2 style="text-align: center; color: #333333;">Activación de Cuenta</h2>
+        <p style="color: #333333;">Hola <strong>${post.nombre}</strong>,</p>
+        <p style="color: #333333;">Gracias por registrarte en nuestro servicio. Por favor, usa el siguiente código para activar tu cuenta:</p>
+        <div style="text-align: center; margin: 20px 0;">
+            <span style="font-size: 24px; font-weight: bold; color: #ff6600;">${post.azar}</span>
+        </div>
+        <p style="color: #333333;">También puedes activar tu cuenta haciendo clic en el siguiente enlace:</p>
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="http://localhost:3000/usuarios/activar/${post.correo}/${post.azar}" style="background-color: #ff6600; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Activar Cuenta</a>
+        </div>
+        <p style="color: #333333;">Si no solicitaste este correo, por favor ignóralo.</p>
+        <p style="color: #333333;">Gracias,</p>
+        <p style="color: #333333;">El equipo de Odontología H&M</p>
+    </div>
+</body>
+</html>
+        
+        
+        
+        <!doctype html>
 <html lang="en">
   <body style="font-family: Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.3; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #f4f5f6; margin: 0; padding: 0;">
     Su código de activación es: ${post.azar}
@@ -69,6 +96,7 @@ usuariosController.save = function(req,res){
 </html>`
     }
 
+    /*
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
             return console.log(error)
