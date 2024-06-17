@@ -14,6 +14,7 @@ var usuariosSchema = new Schema({
     correo:String,
     telefono:String,
     estado:Number,
+    codigoact:String,
     rol:Number
 })
 
@@ -26,6 +27,25 @@ usuariosModel.buscarUsuario = function(post, callback) { //validar tambien cedul
     myModel.find({usuario:post.usuario},{usuario:1,_id:0}).then(
         (respuesta) => {
         console.log("find: ",respuesta)
+
+        if(respuesta.length == 0){
+            return callback({state: true,posicion : -1});
+        }else {
+            return callback({state: true,posicion : respuesta.length});
+
+        }
+    }).catch((err) => {
+        return callback({state: false, mensaje: err,posicion : 0 });
+
+    })
+    
+}
+
+usuariosModel.buscarCorreo = function(post, callback) { //validar tambien cedula y correo
+console.log(post)
+    myModel.find({correo:post.correo},{correo:1,_id:0}).then(
+        (respuesta) => {
+        console.log("findCorreo: ",respuesta)
 
         if(respuesta.length == 0){
             return callback({state: true,posicion : -1});
@@ -95,10 +115,12 @@ usuariosModel.crear = function(post, callback) {
     instancia.cedula=post.cedula
     instancia.correo=post.correo
     instancia.telefono=post.telefono
-    instancia.estado=post.estado
+    instancia.estado=0
+    instancia.codigoact=post.azar
     instancia.rol=post.rol
-
+   
     instancia.save().then((respuesta) => {
+        console.log(respuesta)
         return callback({state : true})
     }).catch((error)=>{
         console.log(error)
@@ -120,6 +142,18 @@ usuariosModel.update = function(post, callback){
     }).then((respuesta) => {
         console.log(respuesta)
         return callback({ state: true })
+    }).catch((error) => {
+        console.log(error)
+        return callback({ state: false, mensaje: error })
+    })
+}
+
+usuariosModel.activar = function(post, callback){
+    console.log("---------------------activar-------------")
+    myModel.updateOne({correo:post.correo,codigoact:post.codigoact},{
+        estado:1,
+    }).then((respuesta) => {
+        return callback({ state: true, respuesta:respuesta })
     }).catch((error) => {
         console.log(error)
         return callback({ state: false, mensaje: error })

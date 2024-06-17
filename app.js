@@ -50,7 +50,7 @@ app.use(cors({
 }))
 
 //1000x60 es un minuto 1000x60x60 es una hora
-
+const MongoStore = require('connect-mongo');
 
 var session = require("express-session")({
     secret:config.palabraClave,
@@ -58,7 +58,8 @@ var session = require("express-session")({
     saveUninitialized:true,
     cookie: {path:"/",httpOnly:true, maxAge: config.maxage},
     name: config.nombrecookie,
-    rolling:true
+    rolling:true,
+    store:MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/"+config.bd+"cookies"})
 })
 
 app.use(session)

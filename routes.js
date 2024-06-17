@@ -46,6 +46,10 @@ app.post('/usuarios/login', async (req,res) => {
     usuariosController.login(req,res);
 });
 
+app.post('/usuarios/activar', async (req,res) => {
+    usuariosController.activar(req,res);
+});
+
 app.post('/usuarios/state', async (req,res) => {
     res.json(req.session)
 });
