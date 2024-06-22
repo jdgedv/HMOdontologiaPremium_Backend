@@ -146,7 +146,6 @@ usuariosController.save = function(req,res){
 
 }
 
-
 usuariosController.list = function(req,res){
     usuariosModel.list(null, function(respuesta){
         res.json(respuesta)
@@ -168,8 +167,6 @@ usuariosController.listId = function(req,res){
     })
 
 }
-
-
 
 usuariosController.update = function(req,res){
     const pass = sha256(req.body.clave + config.passsha256)
@@ -293,7 +290,6 @@ usuariosController.activar = function(req,res){
     })
 
 }
-
 
 validarObligatorios = function(camposObligatorios,post,res){
     for (let campo of camposObligatorios) {
