@@ -5,18 +5,49 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema
 
-var usuariosSchema = new Schema({
-    usuario:String,
-    clave:String,
-    nombre:String,
-    apellidos:String,
-    cedula:String,
-    correo:String,
-    telefono:String,
-    estado:Number,
-    codigoact:String,
-    rol:Number
-})
+const usuariosSchema = new Schema({
+    usuario: {
+        type: String,
+        required: true
+    },
+    clave: {
+        type: String,
+        required: true
+    },
+    nombre: {
+        type: String,
+        required: true
+    },
+    apellidos: {
+        type: String
+    },
+    cedula: {
+        type: String,
+        required: true
+    },
+    correo: {
+        type: String,
+        required: true
+    },
+    telefono: {
+        type: String
+    },
+    direccion: {
+        type: String
+    },
+    imagen: {
+        type: String
+    },
+    estado: {
+        type: Number
+    },
+    codigoact: {
+        type: String
+    },
+    rol: {
+        type: Number
+    }
+});
 
 const myModel = mongoose.model('usuarios',usuariosSchema)
 
@@ -116,6 +147,8 @@ usuariosModel.crear = function(post, callback) {
     instancia.estado=0
     instancia.codigoact=post.azar
     instancia.rol=post.rol
+    instancia.direccion=post.direccion
+    instancia.imagen=post.imagen
    
     instancia.save().then((respuesta) => {
         console.log(respuesta)

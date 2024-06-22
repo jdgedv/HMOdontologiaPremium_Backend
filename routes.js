@@ -1,22 +1,17 @@
 var usuariosController = require('./api/controladores/usuariosController').usuariosController;
-var productos = require('./api/controladores/productosController').productos;
-var categorias = require('./api/controladores/categoriasController').categorias;
+var citasController = require('./api/controladores/citasController').citasController;
+var tratamientosController = require('./api/controladores/tratamientosController').tratamientosController;
+var ciudadesController = require('./api/controladores/ciudadesController').ciudadesController;
+var departamentosController = require('./api/controladores/departamentosController').departamentosController;
 
-app.post("/categorias/save",function(req,res){
-    categorias.saveCategoria(req,res);
+
+app.get('/ciudades/list', async (req,res) => {
+    ciudadesController.list(req,res);
+});
+app.get('/departamentos/list', async (req,res) => {
+    departamentosController.list(req,res);
 });
 
-app.get('/categorias/listar', async (req,res) => {
-    categorias.getCategorias(res);
-});
-
-app.post("/productos/save",function(req,res){
-    productos.saveProducto(req,res);
-});
-
-app.get('/productos/listar', async (req,res) => {
-    productos.getProductos(res);
-});
 
 
 app.post("/usuarios/save",function(req,res){
@@ -49,5 +44,47 @@ app.post('/usuarios/activar', async (req,res) => {
 
 app.post('/usuarios/state', async (req,res) => {
     res.json(req.session)
+});
+
+
+app.post("/citas/save",function(req,res){
+    citasController.save(req,res);
+});
+
+app.get('/citas/list', async (req,res) => {
+    citasController.list(req,res);
+});
+
+app.get('/citas/listId', async (req,res) => {
+    citasController.listId(req,res);
+});
+
+app.put('/citas/update', async (req,res) => {
+    citasController.update(req,res);
+});
+
+app.delete('/citas/delete', async (req,res) => {
+    citasController.delete(req,res);
+});
+
+
+app.post("/tratamientos/save",function(req,res){
+    tratamientosController.save(req,res);
+});
+
+app.get('/tratamientos/list', async (req,res) => {
+    tratamientosController.list(req,res);
+});
+
+app.get('/tratamientos/listId', async (req,res) => {
+    tratamientosController.listId(req,res);
+});
+
+app.put('/tratamientos/update', async (req,res) => {
+    tratamientosController.update(req,res);
+});
+
+app.delete('/tratamientos/delete', async (req,res) => {
+    tratamientosController.delete(req,res);
 });
 

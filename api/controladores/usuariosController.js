@@ -12,6 +12,8 @@ usuariosController.save = function(req,res){
         cedula:req.body.cedula,
         correo:req.body.correo,
         telefono:req.body.telefono,
+        direccion:post.direccion,
+        imagen:post.imagen,
         rol:req.body.rol,
     };
 
