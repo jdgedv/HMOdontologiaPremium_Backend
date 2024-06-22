@@ -12,8 +12,8 @@ usuariosController.save = function(req,res){
         cedula:req.body.cedula,
         correo:req.body.correo,
         telefono:req.body.telefono,
-        direccion:post.direccion,
-        imagen:post.imagen,
+        direccion:req.body.direccion,
+        imagen:req.body.imagen,
         rol:req.body.rol,
     };
 
@@ -180,6 +180,8 @@ usuariosController.update = function(req,res){
         apellidos:req.body.apellidos,
         telefono:req.body.telefono,
         correo:req.body.correo,
+        direccion:req.body.direccion,
+        imagen:req.body.imagen,
         estado:req.body.estado,
         rol:req.body.rol,
     };
