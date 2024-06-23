@@ -5,10 +5,10 @@ tratamientosController.save = function(req,res){
 
 
     var post = {
-        codigo:post.codigo,
-        nombre:post.nombre,
-        descripcion:post.descripcion,
-        precio:post.precio,
+        codigo:req.body.codigo,
+        nombre:req.body.nombre,
+        descripcion:req.body.descripcion,
+        precio:req.body.precio
 
     };
 
