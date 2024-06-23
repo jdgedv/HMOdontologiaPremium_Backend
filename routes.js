@@ -45,6 +45,10 @@ app.post('/usuarios/activar', async (req,res) => {
 app.post('/usuarios/state', async (req,res) => {
     res.json(req.session)
 });
+app.post("/usuarios/logout", async (request, response) => {
+    request.session.destroy()
+    response.json({state:true, mensaje:"Sesión Cerrada"})
+})
 
 
 app.post("/citas/save",function(req,res){

@@ -154,12 +154,12 @@ usuariosController.list = function(req,res){
 
 usuariosController.listId = function(req,res){
 
-    if(post._id == undefined || post._id == null || post.id == ""){
-        res.json({state:false, mensaje:"el campo id del usuario es obligatorio", campo:"_id"})
+    var post = {
+        _id: req.body._id,
     }
 
-    var post = {
-        _id: req.body._id
+    if(post._id == undefined || post._id == null || post.id == ""){
+        res.json({state:false, mensaje:"el campo id del usuario es obligatorio", campo:"_id"})
     }
 
     usuariosModel.listId(post,function(respuesta){
