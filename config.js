@@ -9,7 +9,7 @@ config.origin =[
 ]
 
 config.palabraClave="alsdjkasdkjasdkajshdasd6t87679y86gasd8asd6as8d"
-config.maxage = 60000
+config.maxage = 60000 * 5
 config.nombrecookie="Ibero"
 
 config.passgmail = 'hhnkseamyroepibq'

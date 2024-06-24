@@ -1,3 +1,16 @@
+var soloandmin = function(req, res, next){
+    var rol = req.session.rol
+    if(rol == 1){
+        next()
+    }
+    else{
+        res.json({state:false, mensaje:"Esta ap solo la pueden usar los Administradores"})
+    }
+}
+
+
+
+
 var usuariosController = require('./api/controladores/usuariosController').usuariosController;
 var citasController = require('./api/controladores/citasController').citasController;
 var tratamientosController = require('./api/controladores/tratamientosController').tratamientosController;
