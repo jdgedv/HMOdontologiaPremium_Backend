@@ -123,7 +123,6 @@ citasModel.listUsuario = function(post,callback) {
         });
 };
 
-
 citasModel.update = function(post, callback){
     console.log("---------------------update-------------")
     myModel.updateOne({_id:post._id},{
@@ -142,8 +141,6 @@ citasModel.update = function(post, callback){
         return callback({ state: false, mensaje: error })
     })
 }
-
-
 
 citasModel.delete = function(post, callback){
     console.log("---------------------delete-------------")
