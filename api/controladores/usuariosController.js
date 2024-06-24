@@ -17,6 +17,10 @@ usuariosController.save = function(req,res){
         rol:req.body.rol,
     };
 
+    const camposObligatorios = ["usuario", "clave", "nombre", "apellidos", "cedula", "correo", "telefono"];
+
+    if(!validarObligatorios(camposObligatorios,post,res)) return false
+
 
     //calcular código activación
     var azar = "HMOD-"+Math.floor(Math.random() * (9999 - 1000) + 1000)
@@ -103,9 +107,7 @@ usuariosController.save = function(req,res){
 
 
 
-    const camposObligatorios = ["usuario", "clave", "nombre", "apellidos", "cedula", "correo", "telefono"];
-
-    if(!validarObligatorios(camposObligatorios,post,res)) return false
+    
 
 
     usuariosModel.buscarUsuario(post, function(resultado){
