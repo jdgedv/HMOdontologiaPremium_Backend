@@ -40,8 +40,6 @@ tratamientosController.list = function(req,res){
 
 tratamientosController.listId = function(req,res){
 
-    
-
     var post = {
         _id: req.body._id
     }
