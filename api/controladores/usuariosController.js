@@ -3,10 +3,10 @@ var usuariosController = {}
 
 usuariosController.save = function(req,res){
 
-    const pass = sha256(req.body.clave + config.passsha256)
+    
     var post = {
         usuario:req.body.usuario,
-        clave: pass,
+        clave: req.body.clave,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
         cedula:req.body.cedula,
@@ -20,7 +20,8 @@ usuariosController.save = function(req,res){
     const camposObligatorios = ["usuario", "clave", "nombre", "apellidos", "cedula", "correo", "telefono"];
 
     if(!validarObligatorios(camposObligatorios,post,res)) return false
-
+    const pass = sha256(post.clave + config.passsha256)
+    post.clave = pass;
 
     //calcular código activación
     var azar = "HMOD-"+Math.floor(Math.random() * (9999 - 1000) + 1000)
