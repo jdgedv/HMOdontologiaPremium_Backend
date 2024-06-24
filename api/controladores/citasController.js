@@ -58,9 +58,8 @@ citasController.list = function(req,res){
     })
 }
 
-citasController.listId = function(req,res){
 
-    
+citasController.listId = function(req,res){
 
     var post = {
         _id: req.body._id
@@ -76,15 +75,14 @@ citasController.listId = function(req,res){
 
 }
 
-citasController.listCompleto = function(req,res){
 
-    
+citasController.listCompleto = function(req,res){
 
     var post = {
         _id: req.body._id
     }
 
-    if(post._id == undefined || post._id == null || post.id == ""){
+    if(post._id == undefined || post._id == null || post._id == ""){
         res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id"})
     }
 
@@ -93,6 +91,24 @@ citasController.listCompleto = function(req,res){
     })
 
 }
+
+
+citasController.listUsuario = function(req,res){
+
+    var post = {
+        _id_usuario: req.body._id_usuario
+    }
+
+    if(post._id_usuario == undefined || post._id_usuario == null || post._id_usuario == ""){
+        res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id_usuario"})
+    }
+
+    citasModel.listUsuario(post,function(respuesta){
+        res.json(respuesta)
+    })
+
+}
+
 
 citasController.update = function(req,res){
 
@@ -105,7 +121,6 @@ citasController.update = function(req,res){
         fechayhora:req.body.fechayhora,
         estado:req.body.estado,
     };
-
 
     const camposObligatorios = ["_id"];
 

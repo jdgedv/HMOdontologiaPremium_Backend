@@ -108,6 +108,20 @@ citasModel.listId = function(post, callback){
     })
 }
 
+citasModel.listUsuario = function(post,callback) {
+    console.log("listUsuario post ",post)
+    myModel.find({id_usuarioCliente:post._id_usuario},{})
+        .populate('id_ciudad')       // Poblamos el campo id_ciudad con los datos de la colección Ciudad
+        .populate('id_depto')        // Poblamos el campo id_depto con los datos de la colección Departamento
+        .populate('id_usuarioCliente') // Poblamos el campo id_usuarioCliente con los datos de la colección Usuario
+        .populate('id_tratamiento')  // Poblamos el campo id_tratamiento con los datos de la colección Tratamiento
+        .then((respuesta) => {
+            return callback({ state: true, data: respuesta });
+        })
+        .catch((error) => {
+            return callback({ state: false, error: error });
+        });
+};
 
 
 citasModel.update = function(post, callback){
