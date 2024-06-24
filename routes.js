@@ -1,12 +1,12 @@
-var soloandmin = function(req, res, next){
-    var rol = req.session.rol
-    if(rol == 1){
-        next()
-    }
-    else{
-        res.json({state:false, mensaje:"Esta ap solo la pueden usar los Administradores"})
-    }
-}
+// var soloandmin = function(req, res, next){
+//     var rol = req.session.rol
+//     if(rol == 1){
+//         next()
+//     }
+//     else{
+//         res.json({state:false, mensaje:"Esta ap solo la pueden usar los Administradores"})
+//     }
+// }
 
 
 
