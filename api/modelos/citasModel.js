@@ -18,16 +18,21 @@ const citaSchema = new Schema({
     },
     id_usuarioCliente: {
         type: Schema.Types.ObjectId,
-        ref: 'Usuario',
+        ref: 'usuarios',
         required: true
     },
     id_tratamiento: {
         type: Schema.Types.ObjectId,
-        ref: 'Tratamiento',
+        ref: 'tratamientos',
         required: true
     },
     fechayhora: {
         type: Date,
+        required: true
+    },
+    estado: {
+        type: Boolean,
+        ref: 'Estado',
         required: true
     }
 });
@@ -45,6 +50,7 @@ citasModel.crear = function(post, callback) {
     instancia.id_usuarioCliente=post.id_usuarioCliente
     instancia.id_tratamiento=post.id_tratamiento
     instancia.fechayhora=post.fechayhora
+    instancia.estado=post.estado
 
     instancia.save().then((respuesta) => {
         console.log(respuesta)
@@ -81,25 +87,20 @@ citasModel.list = function(post, callback){
     })
 }
 
-citasModel.listRefurbished = function(post, callback){
-    myModel.find({})
-        .populate('id_ciudad', 'nombre_ciudad')
-        .populate('id_depto', 'nombre_depto')
+citasModel.listCompleto = function(post,callback) {
+    console.log("listCompleto post ",post)
+    myModel.find({_id:post._id},{})
+        .populate('id_ciudad')       // Poblamos el campo id_ciudad con los datos de la colección Ciudad
+        .populate('id_depto')        // Poblamos el campo id_depto con los datos de la colección Departamento
+        .populate('id_usuarioCliente') // Poblamos el campo id_usuarioCliente con los datos de la colección Usuario
+        .populate('id_tratamiento')  // Poblamos el campo id_tratamiento con los datos de la colección Tratamiento
         .then((respuesta) => {
-            // Transformar la respuesta para incluir solo los nombres
-            const citasTransformadas = respuesta.map(cita => {
-                return {
-                    ...cita.toObject(),
-                    nombre_ciudad: cita.id_ciudad.nombre_ciudad,
-                    nombre_depto: cita.id_depto.nombre_depto
-                };
-            });
-            return callback({state: true, data: citasTransformadas});
+            return callback({ state: true, data: respuesta });
         })
-        .catch(error => {
-            return callback({state: false, error: error.message});
+        .catch((error) => {
+            return callback({ state: false, error: error });
         });
-}
+};
 
 citasModel.listId = function(post, callback){
     myModel.find({_id:post._id},{}).then((respuesta) => {
@@ -117,6 +118,7 @@ citasModel.update = function(post, callback){
         id_usuarioCliente:post.id_usuarioCliente,
         id_tratamiento:post.id_tratamiento,
         fechayhora:post.fechayhora,
+        estado:post.estado,
 
     }).then((respuesta) => {
         console.log(respuesta)

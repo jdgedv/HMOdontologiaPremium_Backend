@@ -72,11 +72,8 @@ usuariosController.save = function(req,res){
     <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border: 1px solid #dcdcdc; border-radius: 10px;">
         <h2 style="text-align: center; color: #333333;">Activación de Cuenta</h2>
         <p style="color: #333333;">Hola <strong>${post.nombre}</strong>,</p>
-        <p style="color: #333333;">Gracias por registrarte en nuestro servicio. Por favor, usa el siguiente código para activar tu cuenta:</p>
-        <div style="text-align: center; margin: 20px 0;">
-            <span style="font-size: 24px; font-weight: bold; color: #ff6600;">${post.azar}</span>
-        </div>
-        <p style="color: #333333;">También puedes activar tu cuenta haciendo clic en el siguiente enlace:</p>
+
+        <p style="color: #333333;">Puedes activar tu cuenta haciendo clic en el siguiente enlace:</p>
         <div style="text-align: center; margin: 20px 0;">
             <a href="http://localhost:3000/usuarios/activar/${post.correo}/${post.azar}" style="background-color: #ff6600; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Activar Cuenta</a>
         </div>
@@ -86,10 +83,7 @@ usuariosController.save = function(req,res){
     </div>
 </body>
 </html>
-        
-        
-        
-        <!doctype html>
+<!doctype html>
 <html lang="en">
   <body style="font-family: Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.3; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #f4f5f6; margin: 0; padding: 0;">
     Su código de activación es: ${post.azar}
@@ -98,7 +92,7 @@ usuariosController.save = function(req,res){
 </html>`
     }
 
-    /*
+    
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
             return console.log(error)
@@ -106,7 +100,7 @@ usuariosController.save = function(req,res){
             info
         }
     })
-*/
+
 
 
     const camposObligatorios = ["usuario", "clave", "nombre", "apellidos", "cedula", "correo", "telefono"];
@@ -153,15 +147,17 @@ usuariosController.list = function(req,res){
     })
 }
 
-usuariosController.listId = function(req,res){
 
-    if(post._id == undefined || post._id == null || post.id == ""){
-        res.json({state:false, mensaje:"el campo id del usuario es obligatorio", campo:"_id"})
-    }
+usuariosController.listId = function(req,res){
 
     var post = {
         _id: req.body._id
     }
+    
+    if(post._id == undefined || post._id == null || post.id == ""){
+        res.json({state:false, mensaje:"el campo id del usuario es obligatorio", campo:"_id"})
+    }
+
 
     usuariosModel.listId(post,function(respuesta){
         res.json(respuesta)
@@ -274,9 +270,9 @@ usuariosController.login = function(req,res){
 usuariosController.activar = function(req,res){
 
     
-    var post = {
-        correo:req.body.correo,
-        codigoact:req.body.codigoact
+     var post = {
+        correo: req.params.correo,
+        codigoact: req.params.codigoact
     };
 
 
@@ -285,10 +281,61 @@ usuariosController.activar = function(req,res){
     if(!validarObligatorios(camposObligatorios,post,res)) return false
 
     usuariosModel.activar(post, function(respuesta){
-        if(respuesta.respuesta.modifiedCount==0){
-            res.json({state:false,mensaje:"Sus credenciales de activación son inválidas"});
-        } else if(respuesta.respuesta.modifiedCount==1){
-            res.json({state:true,mensaje:"Cuenta activada correctamente"});
+        if (respuesta.respuesta.modifiedCount == 0) {
+            res.send(`
+
+
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Activación de Cuenta</title>
+                </head>
+                <body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
+                    <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border: 1px solid #dcdcdc; border-radius: 10px;">
+                        <h2 style="text-align: center; color: #333333;">Activación Fallida</h2>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <span style="font-size: 24px; font-weight: bold; color: #ff6600;">Sus credenciales de activación son inválidas.</span>
+                        </div>
+                        
+                    </div>
+                </body>
+                </html>
+
+            `);
+        } else if (respuesta.respuesta.modifiedCount == 1) {
+            res.send(`
+
+
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        
+                        .link {
+                            display: inline-block;
+                            margin-top: 20px;
+                            padding: 10px 20px;
+                            background-color: #ff6600;
+                            color: #ffffff;
+                            text-decoration: none;
+                            border-radius: 5px;
+                        }
+                    </style>
+                    <title>Activación de Cuenta</title>
+                </head>
+                <body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
+                    <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border: 1px solid #dcdcdc; border-radius: 10px;">
+                        <h2 style="text-align: center; color: #333333;">Cuenta activada</h2>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <span style="font-size: 24px; font-weight: bold; color: #ff6600;">Cuenta activada correctamente.</span>
+                        </div>
+                        <a class="link" href="/login">Ir a Login</a>
+                    </div>
+                </body>
+                </html>
+
+
+            `);
         }
     })
 

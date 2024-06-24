@@ -38,7 +38,7 @@ app.post('/usuarios/login', async (req,res) => {
     usuariosController.login(req,res);
 });
 
-app.post('/usuarios/activar', async (req,res) => {
+app.get('/usuarios/activar/:correo/:codigoact', async (req,res) => {
     usuariosController.activar(req,res);
 });
 
@@ -59,6 +59,10 @@ app.get('/citas/listId', async (req,res) => {
     citasController.listId(req,res);
 });
 
+app.get('/citas/listCompleto', async (req,res) => {
+    citasController.listCompleto(req,res);
+});
+
 app.put('/citas/update', async (req,res) => {
     citasController.update(req,res);
 });
@@ -66,6 +70,8 @@ app.put('/citas/update', async (req,res) => {
 app.delete('/citas/delete', async (req,res) => {
     citasController.delete(req,res);
 });
+
+
 
 
 app.post("/tratamientos/save",function(req,res){

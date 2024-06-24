@@ -10,6 +10,7 @@ citasController.save = function(req,res){
         id_usuarioCliente:req.body.id_usuarioCliente,
         id_tratamiento:req.body.id_tratamiento,
         fechayhora:req.body.fechayhora,
+        estado:req.body.estado,
 
     };
 
@@ -59,12 +60,14 @@ citasController.list = function(req,res){
 
 citasController.listId = function(req,res){
 
-    if(post._id == undefined || post._id == null || post.id == ""){
-        res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id"})
-    }
+    
 
     var post = {
         _id: req.body._id
+    }
+
+    if(post._id == undefined || post._id == null || post.id == ""){
+        res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id"})
     }
 
     citasModel.listId(post,function(respuesta){
@@ -73,17 +76,34 @@ citasController.listId = function(req,res){
 
 }
 
+citasController.listCompleto = function(req,res){
 
+    
+
+    var post = {
+        _id: req.body._id
+    }
+
+    if(post._id == undefined || post._id == null || post.id == ""){
+        res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id"})
+    }
+
+    citasModel.listCompleto(post,function(respuesta){
+        res.json(respuesta)
+    })
+
+}
 
 citasController.update = function(req,res){
 
     var post = {
         _id:req.body._id,
-        id_ciudad:post.id_ciudad,
-        id_depto:post.id_depto,
-        id_usuarioCliente:post.id_usuarioCliente,
-        id_tratamiento:post.id_tratamiento,
-        fechayhora:post.fechayhora,
+        id_ciudad:req.body.id_ciudad,
+        id_depto:req.body.id_depto,
+        id_usuarioCliente:req.body.id_usuarioCliente,
+        id_tratamiento:req.body.id_tratamiento,
+        fechayhora:req.body.fechayhora,
+        estado:req.body.estado,
     };
 
 

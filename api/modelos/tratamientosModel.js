@@ -19,6 +19,10 @@ const tratamientosSchema = new Schema({
     precio: {
         type: Number,
         required: true
+    },
+    estado: {
+        type: Boolean,
+        required: true
     }
 
 });
@@ -34,6 +38,7 @@ tratamientosModel.crear = function(post, callback) {
     instancia.nombre=post.nombre
     instancia.descripcion=post.descripcion
     instancia.precio=post.precio
+    instancia.estado=post.estado
 
 
     instancia.save().then((respuesta) => {
@@ -66,6 +71,7 @@ tratamientosModel.update = function(post, callback){
         nombre:post.nombre,
         descripcion:post.descripcion,
         precio:post.precio,
+        estado:post.estado,
 
     }).then((respuesta) => {
         console.log(respuesta)

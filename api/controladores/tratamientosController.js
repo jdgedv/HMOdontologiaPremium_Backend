@@ -5,15 +5,15 @@ tratamientosController.save = function(req,res){
 
 
     var post = {
-        codigo:post.codigo,
-        nombre:post.nombre,
-        descripcion:post.descripcion,
-        precio:post.precio,
-
+        codigo:req.body.codigo,
+        nombre:req.body.nombre,
+        descripcion:req.body.descripcion,
+        precio:req.body.precio,
+        estado:req.body.estado,
     };
 
 
-    const camposObligatorios = ["codigo","nombre", "descripcion", "precio"];
+    const camposObligatorios = ["codigo","nombre", "descripcion", "precio", "estado"];
 
     if(!validarObligatorios(camposObligatorios,post,res)) return false
 
@@ -40,12 +40,14 @@ tratamientosController.list = function(req,res){
 
 tratamientosController.listId = function(req,res){
 
-    if(post._id == undefined || post._id == null || post.id == ""){
-        res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id"})
-    }
+    
 
     var post = {
         _id: req.body._id
+    }
+
+    if(post._id == undefined || post._id == null || post.id == ""){
+        res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id"})
     }
 
     tratamientosModel.listId(post,function(respuesta){
@@ -60,10 +62,11 @@ tratamientosController.update = function(req,res){
 
     var post = {
         _id:req.body._id,
-        codigo:post.codigo,
-        nombre:post.nombre,
-        descripcion:post.descripcion,
-        precio:post.precio,
+        codigo:req.body.codigo,
+        nombre:req.body.nombre,
+        descripcion:req.body.descripcion,
+        precio:req.body.precio,
+        estado:req.body.estado,
     };
 
 
@@ -97,7 +100,7 @@ tratamientosController.delete = function(req,res){
 
             tratamientosModel.delete(post, function(respuesta){
                 if(respuesta.state){
-                    res.json({state:true,mensaje:"Tratamiento eliminada correctamente"});
+                    res.json({state:true,mensaje:"Tratamiento eliminado correctamente"});
                 } else{
                     res.json({state:false,mensaje:"Error al eliminar el tratamiento"});
                 }
@@ -108,13 +111,12 @@ tratamientosController.delete = function(req,res){
             return false;
         }
 
-        console.log(respuesta)
+        console.log(resultado)
         
         
     });
 
 
-    
 }
 
 
