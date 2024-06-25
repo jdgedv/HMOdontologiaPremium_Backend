@@ -255,6 +255,7 @@ usuariosController.login = function(req,res){
                 if(respuesta.data[0].estado==0){
                     res.json({state: false, mensaje:"Su cuenta no ha sido activada, verifique su correo"})
                 }else {
+                    req.session._id = respuesta.data[0]._id
                     req.session.nombre = respuesta.data[0].nombre
                     req.session.correo = respuesta.data[0].correo
                     req.session.rol = respuesta.data[0].rol
