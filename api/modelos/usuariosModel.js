@@ -162,6 +162,7 @@ usuariosModel.crear = function(post, callback) {
 usuariosModel.update = function(post, callback){
     console.log("---------------------update-------------")
     myModel.updateOne({_id:post._id},{
+        usuario:post.usuario,
         nombre:post.nombre,
         apellidos:post.apellidos,
         correo:post.correo,

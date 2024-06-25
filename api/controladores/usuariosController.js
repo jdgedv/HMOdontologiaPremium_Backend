@@ -153,7 +153,7 @@ usuariosController.list = function(req,res){
 usuariosController.listId = function(req,res){
 
     var post = {
-        _id: req.body._id
+        _id: req.session._id
     }
     
     if(post._id == undefined || post._id == null || post.id == ""){
@@ -170,8 +170,9 @@ usuariosController.listId = function(req,res){
 usuariosController.update = function(req,res){
     const pass = sha256(req.body.clave + config.passsha256)
     var post = {
-        _id:req.body._id,
+        _id:req.session._id,
         clave:pass,
+        usuario:req.body.usuario,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
         telefono:req.body.telefono,
