@@ -62,7 +62,7 @@ citasController.list = function(req,res){
 citasController.listId = function(req,res){
 
     var post = {
-        _id: req.body._id
+        _id: req.session._id
     }
 
     if(post._id == undefined || post._id == null || post.id == ""){
