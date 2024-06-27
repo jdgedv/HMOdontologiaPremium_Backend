@@ -182,7 +182,7 @@ usuariosController.update = function(req,res){
         rol:req.body.rol,
     };
 
-    if(req.body.clave){
+    if(req.session.clave){
         const pass = sha256(req.body.clave + config.passsha256)
         this.post.clave=pass
     }
