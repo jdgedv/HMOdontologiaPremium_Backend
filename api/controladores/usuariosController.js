@@ -171,7 +171,6 @@ usuariosController.update = function(req,res){
     
     var post = {
         _id:req.session._id,
-        clave:pass,
         usuario:req.body.usuario,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,
