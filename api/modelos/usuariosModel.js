@@ -23,7 +23,6 @@ const usuariosSchema = new Schema({
     },
     cedula: {
         type: String,
-        required: true
     },
     correo: {
         type: String,
