@@ -168,7 +168,7 @@ usuariosController.listId = function(req,res){
 }
 
 usuariosController.update = function(req,res){
-    const pass = sha256(req.body.clave + config.passsha256)
+    
     var post = {
         _id:req.session._id,
         clave:pass,
@@ -183,6 +183,12 @@ usuariosController.update = function(req,res){
         rol:req.body.rol,
     };
 
+    if(!req.body.clave){
+        this.post.clave=null
+    }else{
+        const pass = sha256(req.body.clave + config.passsha256)
+        this.post.clave=pass
+    }
 
     const camposObligatorios = ["_id"];
 
