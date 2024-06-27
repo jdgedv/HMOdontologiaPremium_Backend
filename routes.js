@@ -72,7 +72,7 @@ app.get('/citas/list', async (req,res) => {
     citasController.list(req,res);
 });
 
-app.get('/citas/listId', async (req,res) => {
+app.post('/citas/listId', async (req,res) => {
     citasController.listId(req,res);
 });
 
@@ -100,7 +100,7 @@ app.get('/tratamientos/list', async (req,res) => {
     tratamientosController.list(req,res);
 });
 
-app.get('/tratamientos/listId', async (req,res) => {
+app.post('/tratamientos/listId', async (req,res) => {
     tratamientosController.listId(req,res);
 });
 
