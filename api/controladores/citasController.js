@@ -10,7 +10,7 @@ citasController.save = function(req,res){
         id_usuarioCliente:req.body.id_usuarioCliente,
         id_tratamiento:req.body.id_tratamiento,
         fechayhora:req.body.fechayhora,
-        estado:req.body.estado,
+        estado:1,
 
     };
 
@@ -96,7 +96,7 @@ citasController.listCompleto = function(req,res){
 citasController.listUsuario = function(req,res){
 
     var post = {
-        _id_usuario: req.body._id_usuario
+        _id_usuario: req.session._id
     }
 
     if(post._id_usuario == undefined || post._id_usuario == null || post._id_usuario == ""){
