@@ -17,7 +17,7 @@ usuariosController.save = function(req,res){
         rol:req.body.rol,
     };
 
-    const camposObligatorios = ["usuario", "clave", "nombre", "apellidos", "cedula", "correo", "telefono"];
+    const camposObligatorios = ["usuario", "clave", "nombre", "correo"];
 
     if(!validarObligatorios(camposObligatorios,post,res)) return false
     const pass = sha256(post.clave + config.passsha256)

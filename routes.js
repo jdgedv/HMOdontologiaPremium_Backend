@@ -14,6 +14,7 @@ var soloandmin = function(req, res, next){
 
 var usuariosController = require('./api/controladores/usuariosController').usuariosController;
 var citasController = require('./api/controladores/citasController').citasController;
+var contactoController = require('./api/controladores/contactoController').contactoController;
 var tratamientosController = require('./api/controladores/tratamientosController').tratamientosController;
 var ciudadesController = require('./api/controladores/ciudadesController').ciudadesController;
 var departamentosController = require('./api/controladores/departamentosController').departamentosController;
@@ -111,3 +112,19 @@ app.delete('/tratamientos/delete', async (req,res) => {
     tratamientosController.delete(req,res);
 });
 
+app.post("/contacto/save",function(req,res){
+    contactoController.save(req,res);
+});
+
+app.get('/contacto/list', async (req,res) => {
+    contactoController.list(req,res);
+});
+
+
+app.put('/contacto/update', async (req,res) => {
+    contactoController.update(req,res);
+});
+
+app.delete('/contacto/delete', async (req,res) => {
+    contactoController.delete(req,res);
+});
