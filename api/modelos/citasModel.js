@@ -82,7 +82,11 @@ citasModel.buscarCitasCliente = function(post, callback) { //validar tambien ced
 }
 
 citasModel.list = function(post, callback){
-    myModel.find({},{}).then((respuesta) => {
+    myModel.find({},{})
+    .populate('id_ciudad')       // Poblamos el campo id_ciudad con los datos de la colección Ciudad
+    .populate('id_depto')        // Poblamos el campo id_depto con los datos de la colección Departamento
+    .populate('id_usuarioCliente') // Poblamos el campo id_usuarioCliente con los datos de la colección Usuario
+    .populate('id_tratamiento').then((respuesta) => {
         return callback({state:true, data:respuesta})
     })
 }
