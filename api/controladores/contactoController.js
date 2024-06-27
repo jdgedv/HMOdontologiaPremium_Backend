@@ -68,13 +68,22 @@ contactoController.update = function(req,res){
 
     if(!validarObligatorios(camposObligatorios,post,res)) return false
 
-    contactoModel.updateStatus(post, function(respuesta){
-        if(respuesta.state){
-            res.json({state:true,mensaje:"Información de contacto actualizada correctamente"});
-        } else{
-            res.json({state:false,mensaje:"Error al actualizar el estado"});
+    contactoModel.listId(post, function(resultado){
+            
+        if(resultado.posicion != -1){
+
+            contactoModel.updateStatus(post, function(respuesta){
+                if(respuesta.state){
+                    res.json({state:true,mensaje:"Información de contacto actualizada correctamente"});
+                } else{
+                    res.json({state:false,mensaje:"Error al actualizar el estado"});
+                }
+            })
+        }else {
+            res.json({ state:false,mensaje: 'El _id del registro no es válido' });
+            return false;
         }
-    })
+    });
 }
 
 contactoController.delete = function(req,res){
@@ -96,16 +105,14 @@ contactoController.delete = function(req,res){
                 if(respuesta.state){
                     res.json({state:true,mensaje:"Información de contacto eliminada correctamente"});
                 } else{
-                    res.json({state:false,mensaje:"Error al eliminar la cita"});
+                    res.json({state:false,mensaje:"Error al eliminar la información de contacto"});
                 }
             })
             
         }else {
-            res.json({ state:false,mensaje: 'El _id de la cita no es válido' });
+            res.json({ state:false,mensaje: 'El _id del registro no es válido' });
             return false;
         }
-
-        console.log(respuesta)
         
         
     });

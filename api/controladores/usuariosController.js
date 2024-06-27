@@ -170,7 +170,7 @@ usuariosController.listId = function(req,res){
 usuariosController.update = function(req,res){
     
     var post = {
-        _id:req.session._id,
+        _id:req.body._id ? req.body._id : req.session._id,
         usuario:req.body.usuario,
         nombre:req.body.nombre,
         apellidos:req.body.apellidos,

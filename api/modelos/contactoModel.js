@@ -72,7 +72,12 @@ contactoModel.listData = function(post,callback) {
 
 contactoModel.listId = function(post, callback){
     myModel.find({_id:post._id},{}).then((respuesta) => {
-        return callback({ state: true, data: respuesta })
+        if(respuesta.length == 0){
+            return callback({state: true,posicion : -1});
+        }else {
+            return callback({state: true,posicion : respuesta.length});
+
+        }
     })
 }
 
