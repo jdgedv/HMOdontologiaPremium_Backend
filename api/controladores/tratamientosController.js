@@ -39,18 +39,20 @@ tratamientosController.list = function(req,res){
 }
 
 tratamientosController.listId = function(req,res){
-
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx",req.body)
     var post = {
         _id: req.body._id
     }
 
-    if(post._id == undefined || post._id == null || post.id == ""){
+    if(post._id == undefined || post._id == null || post._id == ""){
         res.json({state:false, mensaje:"el identificador es obligatorio", campo:"_id"})
+    }else {
+        tratamientosModel.listId(post,function(respuesta){
+            res.json(respuesta)
+        })
     }
 
-    tratamientosModel.listId(post,function(respuesta){
-        res.json(respuesta)
-    })
+    
 
 }
 
