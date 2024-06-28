@@ -17,7 +17,7 @@ usuariosController.save = function(req,res){
         rol:req.body.rol,
     };
 
-    const camposObligatorios = ["usuario", "clave", "nombre", "correo"];
+    const camposObligatorios = ["usuario", "cedula", "clave", "nombre", "correo"];
 
     if(!validarObligatorios(camposObligatorios,post,res)) return false
     const pass = sha256(post.clave + config.passsha256)
@@ -173,6 +173,7 @@ usuariosController.update = function(req,res){
         _id:req.body._id ? req.body._id : req.session._id,
         usuario:req.body.usuario,
         nombre:req.body.nombre,
+        cedula:req.body.cedula,
         apellidos:req.body.apellidos,
         telefono:req.body.telefono,
         correo:req.body.correo,

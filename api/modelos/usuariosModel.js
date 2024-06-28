@@ -163,6 +163,7 @@ usuariosModel.update = function(post, callback){
     myModel.updateOne({_id:post._id},{
         usuario:post.usuario,
         nombre:post.nombre,
+        cedula:post.cedula,
         apellidos:post.apellidos,
         correo:post.correo,
         telefono:post.telefono,
