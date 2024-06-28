@@ -43,7 +43,7 @@ app.put('/usuarios/update', async (req,res) => {
     usuariosController.update(req,res);
 });
 
-app.delete('/usuarios/delete', async (req,res) => {
+app.post('/usuarios/delete', async (req,res) => {
     usuariosController.delete(req,res);
 });
 
