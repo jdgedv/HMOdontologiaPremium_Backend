@@ -229,8 +229,7 @@ usuariosController.delete = function(req,res){
             return false;
         }
 
-        console.log(respuesta)
-        
+      
         
     });
 
