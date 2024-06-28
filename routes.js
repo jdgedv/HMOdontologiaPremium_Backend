@@ -35,7 +35,7 @@ app.get('/usuarios/list', async (req,res) => {
     usuariosController.list(req,res);
 });
 
-app.get('/usuarios/listId', async (req,res) => {
+app.post('/usuarios/listId', async (req,res) => {
     usuariosController.listId(req,res);
 });
 

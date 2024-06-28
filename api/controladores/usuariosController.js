@@ -153,7 +153,7 @@ usuariosController.list = function(req,res){
 usuariosController.listId = function(req,res){
 
     var post = {
-        _id: req.session._id
+        _id: req.body._id ? req.body._id : req.session._id
     }
     
     if(post._id == undefined || post._id == null || post.id == ""){
