@@ -19,6 +19,7 @@ var tratamientosController = require('./api/controladores/tratamientosController
 var ciudadesController = require('./api/controladores/ciudadesController').ciudadesController;
 var departamentosController = require('./api/controladores/departamentosController').departamentosController;
 
+var imagesController = require('./api/controladores/imagesController').imagesController;
 
 app.get('/ciudades/list', async (req,res) => {
     ciudadesController.list(req,res);
@@ -127,4 +128,13 @@ app.put('/contacto/update', async (req,res) => {
 
 app.delete('/contacto/delete', async (req,res) => {
     contactoController.delete(req,res);
+});
+
+
+
+
+
+
+app.post("/upload/:_id", function(req,res){
+    imagesController.Avatar(req,res)
 });

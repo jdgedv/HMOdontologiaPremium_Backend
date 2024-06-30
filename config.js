@@ -15,6 +15,8 @@ config.nombrecookie="Ibero"
 config.passgmail = 'hhnkseamyroepibq'
 config.usergmail = 'hympremium645@gmail.com' 
 
+
+
 config.passsha256 = "8aud09a8sD9hga0shd8d_ha7h9Aha9Uha9dha9sdjhaV89789hash8d.s97da9sa9s7dha9FFhd9"
 
 module.exports.config = config;
