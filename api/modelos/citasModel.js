@@ -31,7 +31,7 @@ const citaSchema = new Schema({
         required: true
     },
     estado: {
-        type: Boolean,
+        type: Number,
         ref: 'Estado',
         required: true
     }

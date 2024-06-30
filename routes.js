@@ -109,7 +109,7 @@ app.put('/tratamientos/update', async (req,res) => {
     tratamientosController.update(req,res);
 });
 
-app.delete('/tratamientos/delete', async (req,res) => {
+app.post('/tratamientos/delete', async (req,res) => {
     tratamientosController.delete(req,res);
 });
 

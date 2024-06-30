@@ -21,7 +21,7 @@ const tratamientosSchema = new Schema({
         required: true
     },
     estado: {
-        type: Boolean,
+        type: Number,
         required: true
     }
 
