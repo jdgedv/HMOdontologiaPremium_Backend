@@ -89,7 +89,7 @@ app.put('/citas/update', async (req,res) => {
     citasController.update(req,res);
 });
 
-app.delete('/citas/delete', async (req,res) => {
+app.post('/citas/delete', async (req,res) => {
     citasController.delete(req,res);
 });
 
