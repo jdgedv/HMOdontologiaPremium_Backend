@@ -6,7 +6,7 @@ var imagesController = {}
 imagesController.Avatar = function(req,res){
 
     var post = {
-        _id:req.params._id
+        _id:req.session._id
     }
 
     if(post._id == undefined || post._id == null || post._id == ""){
@@ -19,7 +19,7 @@ imagesController.Avatar = function(req,res){
         var upload = multer({
             storage : multer.diskStorage({
                 destination:(req,file,cb) => {
-                    cb(null,"uploads/")
+                    cb(null,raiz + "/uploads/")
                 },
                 filename:(req,file,cb) => {
                     cb(null,post._id + '.png')

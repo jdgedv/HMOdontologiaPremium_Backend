@@ -135,6 +135,6 @@ app.delete('/contacto/delete', async (req,res) => {
 
 
 
-app.post("/upload/:_id", function(req,res){
+app.post("/upload", function(req,res){
     imagesController.Avatar(req,res)
 });
