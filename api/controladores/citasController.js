@@ -22,7 +22,7 @@ citasController.save = function(req,res){
     citasModel.crear(post, function(resultado){
         if(resultado.state){
             console.log(resultado)
-            res.json({state:true,mensaje:"Cita creada correctamente"});
+            res.json({state:true,mensaje:"Cita creada correctamente, La confirmación de la cita se hara de manera telefónica"});
         } else{
             console.log(resultado)
             res.json({state:false,mensaje:"Error al registrar la cita"});
