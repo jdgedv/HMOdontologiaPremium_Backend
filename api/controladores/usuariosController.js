@@ -30,13 +30,13 @@ usuariosController.save = function(req,res){
 console.log(">>>>>>>>>>>>>>",post)
     switch(post.rol){
         case 1:
-            if(this.post.clave=='' || this.post.clave == null) this.post.clave = this.post.cedula
+            if(post.clave=='' || post.clave == null) post.clave = post.cedula
             break;
         case 2:
-            if(this.post.clave=='' || this.post.clave == null) this.post.clave = this.post.cedula
+            if(post.clave=='' || post.clave == null) post.clave = post.cedula
             break;
         case 3:
-            this.post.usuario=this.post.correo
+            post.usuario=post.correo
             break;
 
     }
