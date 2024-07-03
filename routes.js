@@ -36,6 +36,10 @@ app.get('/usuarios/list', async (req,res) => {
     usuariosController.list(req,res);
 });
 
+app.get('/usuarios/listClientes', async (req,res) => {
+    usuariosController.listClientes(req,res);
+});
+
 app.post('/usuarios/listId', async (req,res) => {
     usuariosController.listId(req,res);
 });

@@ -17,11 +17,10 @@ usuariosController.save = function(req,res){
         rol:req.body.rol,
     };
 
-    const camposObligatorios = ["usuario", "cedula", "clave", "nombre", "correo"];
+    const camposObligatorios = ["usuario", "cedula", "nombre", "correo"];
 
     if(!validarObligatorios(camposObligatorios,post,res)) return false
-    const pass = sha256(post.clave + config.passsha256)
-    post.clave = pass;
+    
 
     //calcular código activación
     var azar = "HMOD-"+Math.floor(Math.random() * (9999 - 1000) + 1000)
@@ -31,16 +30,20 @@ usuariosController.save = function(req,res){
 
     switch(post.rol){
         case 1:
-            //se esta intentando crear un administrador
+            if(this.post.clave=='' || this.post.clave == null) this.post.clave = this.post.cedula
             break;
         case 2:
-            //se esta intentando crear un usuario administrativo
+            if(this.post.clave=='' || this.post.clave == null) this.post.clave = this.post.cedula
             break;
         case 3:
-            //se esta intentando crear un cliente
+            this.post.usuario=this.post.correo
             break;
 
     }
+
+    //encriptación
+    const pass = sha256(post.clave + config.passsha256)
+    post.clave = pass;
 
     //crearCorreo
     const nodemailer = require("nodemailer")
@@ -55,13 +58,6 @@ usuariosController.save = function(req,res){
             pass:config.passgmail 
         }
     })
-
-//PENDIENTE CONFIGURACION:
-//datos del config
-//se requiere un correo de salida (desde donde seran enviados los correos) y obtener la clave que permita el envío de dichos mensajes
-//ver clase del 06 de junio 2024 mas o menos a partir de 2:30:00
-//el html tiene un enlace con el correo y el código de activación, dicha página debe existir en front y es la que debe llamar a la ruta de activar.
-
 
     let mailOptions = {
         from: config.usergmail,
@@ -167,6 +163,15 @@ usuariosController.listId = function(req,res){
 
 }
 
+usuariosController.listClientes = function(req,res){
+
+
+    usuariosModel.listClientes(post,function(respuesta){
+        res.json(respuesta)
+    })
+
+}
+
 usuariosController.update = function(req,res){
     
     var post = {
@@ -183,7 +188,7 @@ usuariosController.update = function(req,res){
         rol:req.body.rol,
     };
 
-    if(req.session.clave){
+    if(req.body.clave){
         const pass = sha256(req.body.clave + config.passsha256)
         this.post.clave=pass
     }
@@ -334,7 +339,7 @@ usuariosController.activar = function(req,res){
                         <div style="text-align: center; margin: 20px 0;">
                             <span style="font-size: 24px; font-weight: bold; color: #ff6600;">Cuenta activada correctamente.</span>
                         </div>
-                        <a class="link" href="/login">Ir a Login</a>
+                        <a class="link" href="http://localhost:4200//login">Ir a Login</a>
                     </div>
                 </body>
                 </html>

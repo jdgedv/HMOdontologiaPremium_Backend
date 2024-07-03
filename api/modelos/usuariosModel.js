@@ -134,6 +134,12 @@ usuariosModel.listId = function(post, callback){
     })
 }
 
+usuariosModel.listClientes = function(post, callback){
+    myModel.find({rol:3,estado:1},{_id:1, nombre:1, apellidos:1, cedula:1, correo:1, telefono:1}).then((respuesta) => {
+        return callback({ state: true, data: respuesta })
+    })
+}
+
 usuariosModel.crear = function(post, callback) {
     const instancia = new myModel
     instancia.usuario=post.usuario
