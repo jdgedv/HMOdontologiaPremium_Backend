@@ -37,6 +37,7 @@ console.log(">>>>>>>>>>>>>>",post)
             break;
         case 3:
             post.usuario=post.correo
+            if(post.clave=='' || post.clave == null) post.clave = post.cedula
             break;
 
     }
