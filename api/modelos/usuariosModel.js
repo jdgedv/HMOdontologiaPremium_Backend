@@ -189,7 +189,7 @@ usuariosModel.validaParams = function(post, callback) {
     }
 
     const regexNum = new RegExp(/^[0-9]+$/);
-    const esValido = regex.test(post.cedula);
+    const esValido = regexNum.test(post.cedula);
     if(post.cedula && !esValido){
         return callback({state: false, mensaje: 'La cedula solo puede contener números'});
     }
@@ -198,8 +198,7 @@ usuariosModel.validaParams = function(post, callback) {
         return callback({state: false, mensaje: 'El telefono debe tener máximo 20 caracteres'});
     }
 
-    const regexNum = new RegExp(/^[0-9]+$/);
-    const esValido2 = regex.test(post.telefono);
+    const esValido2 = regexNum.test(post.telefono);
     if(post.telefono && !esValido2){
         return callback({state: false, mensaje: 'El telefono solo puede contener números'});
     }
