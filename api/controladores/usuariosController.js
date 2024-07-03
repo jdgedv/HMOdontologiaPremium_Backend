@@ -166,7 +166,7 @@ usuariosController.listId = function(req,res){
 usuariosController.listClientes = function(req,res){
 
 
-    usuariosModel.listClientes(post,function(respuesta){
+    usuariosModel.listClientes(function(respuesta){
         res.json(respuesta)
     })
 
@@ -187,9 +187,7 @@ usuariosController.update = function(req,res){
         estado:req.body.estado,
         rol:req.body.rol,
     };
-    console.log("post",post)
     if(req.body.clave){
-        console.log("req.body",req.body)
         const pass = sha256(req.body.clave + config.passsha256)
         post.clave=pass
     }
