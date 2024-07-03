@@ -10,7 +10,7 @@ citasController.save = function(req,res){
         id_usuarioCliente:req.body.id_usuarioCliente,
         id_tratamiento:req.body.id_tratamiento,
         fechayhora:req.body.fechayhora,
-        estado:1,
+        estado:0,
 
     };
 
