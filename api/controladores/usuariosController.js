@@ -27,7 +27,7 @@ usuariosController.save = function(req,res){
     post.azar = azar
 
     //validar tipos de usuario
-
+console.log(">>>>>>>>>>>>>>",post)
     switch(post.rol){
         case 1:
             if(this.post.clave=='' || this.post.clave == null) this.post.clave = this.post.cedula

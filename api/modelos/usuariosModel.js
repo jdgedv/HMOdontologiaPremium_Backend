@@ -164,6 +164,50 @@ usuariosModel.crear = function(post, callback) {
     })
 }
 
+usuariosModel.validaParams = function(post, callback) {
+
+
+
+    if(post.usuario && (post.usuario.length>30 || post.usuario.length<5)){
+        return callback({state: false, mensaje: 'El campo usuario debe tener entre 5 y 30 caracteres'});
+    }
+
+    if(post.nombre && (post.nombre.length>30 || post.nombre.length<5)){
+        return callback({state: false, mensaje: 'El nombre del usuario debe tener entre 2 y 30 caracteres'});
+    }
+
+    if(post.apellidos && (post.apellidos.length>30 || post.apellidos.length<2)){
+        return callback({state: false, mensaje: 'El apellido del usuario debe tener entre 2 y 30 caracteres'});
+    }
+
+    if(post.correo && (post.correo.length>30 || post.correo.length<2)){
+        return callback({state: false, mensaje: 'El correo del usuario debe tener entre 5 y 50 caracteres'});
+    }
+
+    if(post.cedula && (post.cedula.length>15 || post.cedula.length<6)){
+        return callback({state: false, mensaje: 'La cedula del usuario debe tener entre 6 y 15 caracteres'});
+    }
+
+    const regexNum = new RegExp(/^[0-9]+$/);
+    const esValido = regex.test(post.cedula);
+    if(post.cedula && !esValido){
+        return callback({state: false, mensaje: 'La cedula solo puede contener números'});
+    }
+
+    if(post.telefono && (post.telefono.length>20)){
+        return callback({state: false, mensaje: 'El telefono debe tener máximo 20 caracteres'});
+    }
+
+    const regexNum = new RegExp(/^[0-9]+$/);
+    const esValido2 = regex.test(post.telefono);
+    if(post.telefono && !esValido2){
+        return callback({state: false, mensaje: 'El telefono solo puede contener números'});
+    }
+
+    return callback({state: true});
+    
+}
+
 usuariosModel.update = function(post, callback){
     console.log("---------------------update-------------")
     myModel.updateOne({_id:post._id},{
