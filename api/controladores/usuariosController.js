@@ -174,7 +174,7 @@ usuariosController.listClientes = function(req,res){
 
 usuariosController.update = function(req,res){
     
-    var post = {
+    let post = {
         _id:req.body._id ? req.body._id : req.session._id,
         usuario:req.body.usuario,
         nombre:req.body.nombre,
@@ -187,10 +187,11 @@ usuariosController.update = function(req,res){
         estado:req.body.estado,
         rol:req.body.rol,
     };
-
+    console.log("post",post)
     if(req.body.clave){
+        console.log("req.body",req.body)
         const pass = sha256(req.body.clave + config.passsha256)
-        this.post.clave=pass
+        post.clave=pass
     }
 
     const camposObligatorios = ["_id"];
