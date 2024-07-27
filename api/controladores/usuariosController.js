@@ -77,7 +77,7 @@ console.log(">>>>>>>>>>>>>>",post)
 
         <p style="color: #333333;">Puedes activar tu cuenta haciendo clic en el siguiente enlace:</p>
         <div style="text-align: center; margin: 20px 0;">
-            <a href="http://localhost:3000/usuarios/activar/${post.correo}/${post.azar}" style="background-color: #ff6600; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Activar Cuenta</a>
+            <a href="http://0.0.0.0:3000/usuarios/activar/${post.correo}/${post.azar}" style="background-color: #ff6600; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Activar Cuenta</a>
         </div>
         <p style="color: #333333;">Si no solicitaste este correo, por favor ignóralo.</p>
         <p style="color: #333333;">Gracias,</p>
@@ -89,7 +89,7 @@ console.log(">>>>>>>>>>>>>>",post)
 <html lang="en">
   <body style="font-family: Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.3; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #f4f5f6; margin: 0; padding: 0;">
     Su código de activación es: ${post.azar}
-    para activar haga clic en <a href='http://localhost:3000/usuarios/activar/${post.correo}/${post.azar}'>este_enlace</a>
+    para activar haga clic en <a href='http://0.0.0.0:3000/usuarios/activar/${post.correo}/${post.azar}'>este_enlace</a>
   </body>
 </html>`
     }
@@ -339,7 +339,7 @@ usuariosController.activar = function(req,res){
                         <div style="text-align: center; margin: 20px 0;">
                             <span style="font-size: 24px; font-weight: bold; color: #ff6600;">Cuenta activada correctamente.</span>
                         </div>
-                        <a class="link" href="http://localhost:4200//login">Ir a Login</a>
+                        <a class="link" href="http://0.0.0.0:4200//login">Ir a Login</a>
                     </div>
                 </body>
                 </html>
