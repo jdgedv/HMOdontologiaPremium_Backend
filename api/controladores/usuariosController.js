@@ -110,7 +110,7 @@ console.log(">>>>>>>>>>>>>>",post)
 
     usuariosModel.buscarUsuario(post, function(resultado){
             
-        if(resultado.posicion == -1){
+        if(resultado.posicion === -1){
 
             usuariosModel.buscarCorreo(post, function(resultadoCorr){
                 if(resultadoCorr.posicion == -1){

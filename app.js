@@ -35,9 +35,9 @@ app.all('*',function(req, res, next){
 
 const mongoose = require("mongoose")
 
+//"mongodb://27017/mongo"
 
-
-mongoose.connect("mongodb://18.191.167.141:27017/" + config.bd, {}).then(
+mongoose.connect("mongodb://27017/mongo" + config.bd, {}).then(
     ()=>console.log("connected")
 ).catch((error)=>{
     console.log(error)
@@ -45,21 +45,20 @@ mongoose.connect("mongodb://18.191.167.141:27017/" + config.bd, {}).then(
 
 var cors = require("cors")
 
-app.use(cors({
-    origin: function(origin, callback) {
-        if (!origin) return callback(null, true) //peticiones horizontales
-
-        if (config.origin.indexOf(origin) === -1) {
-            return callback('error de cors', false)
-        }
-
-        return callback(null, true)
-    }
-}))
+//configuracion de CORS para permitir el uso de credenciales
+const corsOptions = {
+  origin:'http://3.138.202.30:4200', //El origen que deseas permitir
+  credentials: true //Permitir credenciales (cookies, cabeceras de autorizacion, etc.)
+  };
+  
+app.use(cors(corsOptions));
 
 //1000x60 es un minuto 1000x60x60 es una hora
 const MongoStore = require('connect-mongo');
-//18.191.167.141
+//3.138.202.30 publica
+//172.20.0.3 mongo
+//172.20.0.2 frontend
+//172.20.0.4 backend
 const hostname = '0.0.0.0';
 const port = 3000;
 
@@ -70,7 +69,7 @@ var session = require("express-session")({
     cookie: {path:"/",httpOnly:true, maxAge: config.maxage},
     name: config.nombrecookie,
     rolling:true,
-    store:MongoStore.create({mongoUrl:"mongodb://"+hostname+":27017/"+config.bd+"cookies"})
+    store:MongoStore.create({mongoUrl:"mongodb://27017/mongo"+config.bd+"cookies"})
 })
 
 app.use(session)
